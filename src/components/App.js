@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { fetchArticles } from '../asyncAction/articles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import Header from './Header';
 import Article from './Article';
 import ArticleList from './ArticleList';
 import ArticleContent from './ArticleContent';
@@ -30,10 +32,13 @@ const App = ({ articles, error, loading, page }) => {
         {/* {articles.map((article) => (
           <div>{article.name}</div>
         ))} */}
-        <Routes>
-          <Route path="/" element={<ArticleList />} /> 
-          <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
-        </Routes>
+        <Header />
+        <div className='container'>
+          <Routes>
+            <Route path="/" element={<ArticleList />} /> 
+            <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );
