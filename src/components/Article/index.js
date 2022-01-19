@@ -7,7 +7,6 @@ import heart from '../../img/heart.svg';
 import './Article.css';
 
 const Article = (props) => {
-
   return (
     <div className="article">
       <div className="article__head">

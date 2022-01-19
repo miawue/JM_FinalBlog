@@ -9,7 +9,6 @@ import Header from './Header';
 import Article from './Article';
 import ArticleContent from './ArticleContent';
 
-
 const App = ({ articles, error, loading, page }) => {
   const dispatch = useDispatch();
 
@@ -28,14 +27,12 @@ const App = ({ articles, error, loading, page }) => {
   return (
     <div>
       <BrowserRouter>
-        {articles.map((article) => (
-          <div>{article.name}</div>
-        ))}
+        {articles ? articles.map((article) => <div key={article.slug}>{article.title}</div>) : null}
         <Header />
-        <div className='container'>
+        <div className="container">
           <Routes>
             <Route path="/" element={<Article />} /> // внутри element будет вызов функции рендера статей
-            <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
+            <Route path="/article" element={<Article renderArticleContent={ArticleContent} />} />
           </Routes>
         </div>
       </BrowserRouter>
@@ -44,7 +41,7 @@ const App = ({ articles, error, loading, page }) => {
 };
 
 const mapStateToProps = (state) => ({
-  articles: state.articleReducer.articles,
+  articles: state.articleReducer.articles.articles,
   loading: state.articleReducer.loading,
   error: state.articleReducer.error,
   page: state.articleReducer.page,
