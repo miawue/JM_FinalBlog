@@ -1,34 +1,36 @@
-.post {
+.article {
     padding: 15px;
-    display: grid;
-    grid-template-columns: 1fr max-content;
-    column-gap: 85px;
     width: 938px;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.post__inner {
+.article__head {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    column-gap: 85px;
+}
+
+.article__inner {
     display: flex;
     align-items: center;
 }
 
-.post__title {
+.article__title {
     margin: 0 13px 0 0;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 20px;
     line-height: 28px;
     color: #1890FF;
-    
 }
 
-.post__like-counter {
+.article__like-counter {
     display: flex;
     align-items: center;
 }
 
-.post__like-btn {
+.article__like-btn {
     margin-right: 5px;
     display: flex;
     align-items: center;
@@ -39,7 +41,7 @@
     border: none;
 }
 
-.post__like-text {
+.article__like-text {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 12px;
@@ -52,7 +54,7 @@
     align-items: center;
 }
 
-.author__name, .author__post-date {
+.author__name, .author__article-date {
     margin: 0;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -62,7 +64,7 @@
 
 }
 
-.author__post-date {
+.author__article-date {
     font-size: 12px;
     color: rgba(0, 0, 0, 0.5);
 }
@@ -80,7 +82,7 @@
     object-fit: contain;
 }
 
-.post__tag {
+.article__tag {
     margin: 4px 0;
     padding: 3px 6px;
     display: inline-block;
@@ -93,7 +95,7 @@
     border-radius: 2px;
 }
 
-.post__text {
+.article__text {
     margin: 0;
     font-family: 'Inter', sans-serif;
     font-weight: 400;

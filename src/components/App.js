@@ -2,6 +2,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchArticles } from '../asyncAction/articles';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Article from './Article';
+import ArticleContent from './ArticleContent';
 
 const App = () => {
   const { articles, error, loading } = useSelector((state) => state.articleReducer);
@@ -22,9 +25,15 @@ const App = () => {
 
   return (
     <div>
-      {articles.map((article) => (
-        <div>{article.name}</div>
-      ))}
+      <BrowserRouter>
+        {articles.map((article) => (
+          <div>{article.name}</div>
+        ))}
+        <Routes>
+          <Route path="/" element={<Article />} /> // внутри element будет вызов функции рендера статей
+          <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} /> // при нажатии на заголовок выбранная статья кладется в state и здесь мы ее рендерим 
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
