@@ -13,7 +13,7 @@ const Article = (props) => {
       <div className="article__head">
         <div>
           <div className="article__inner">
-            <Link to="/article" className="article__title">
+            <Link to="/article" className="article__title link">
               Some article title
             </Link>
             <div className="article__like-counter">
