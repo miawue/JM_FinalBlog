@@ -7,7 +7,7 @@ export const fetchArticles =
   (dispatch) => {
     dispatch({ type: FETCH_ARTICLES });
 
-    fetch('http://kata.academy:8022/api/articles')
+    fetch(`http://kata.academy:8022/api/articles?limit=5&offset=${page > 1 ? page * 5 : 0}`)
       .then((response) => response.json())
       .then((response) => dispatch({ type: FETCH_ARTICLES_SUCCESS, payload: response }))
 

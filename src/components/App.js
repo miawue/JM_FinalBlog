@@ -12,7 +12,7 @@ const App = ({ articles, error, loading, page }) => {
 
   useEffect(() => {
     dispatch(fetchArticles(page));
-  }, []);
+  }, [page]);
 
   if (loading) {
     return <h1>Идёт загрузка..</h1>;
