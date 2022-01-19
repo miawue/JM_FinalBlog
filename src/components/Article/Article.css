@@ -1,7 +1,8 @@
 .article {
+    margin-top: 25px;
     padding: 15px;
-    width: 938px;
     border-radius: 5px;
+    background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -23,7 +24,6 @@
     font-size: 20px;
     line-height: 28px;
     color: #1890FF;
-    text-decoration: none;
 }
 
 .article__like-counter {

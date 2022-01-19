@@ -4,6 +4,12 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #EBEEF3;
+}
+
+.container {
+    margin: 0 auto;
+    width: 938px;
 }
 
 .list {
@@ -14,4 +20,8 @@ body {
 
 .button {
     cursor: pointer;
+}
+
+.link {
+    text-decoration: none;
 }

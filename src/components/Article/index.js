@@ -12,7 +12,7 @@ const Article = (props) => {
             <div className='article__head'>
                 <div>
                     <div className='article__inner'>
-                        <Link to='/article' className='article__title'>Some article title</Link>
+                        <Link to='/article' className='article__title link'>Some article title</Link>
                         <div className='article__like-counter'>
                             <button className='article__like-btn button' id='like'>
                                 <img src={heart} alt='icon' />
