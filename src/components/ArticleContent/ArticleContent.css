@@ -29,7 +29,9 @@
 }
 
 .content__list {
+    margin: 10px 0;
     padding: 0 0 0 15px;
+    list-style: decimal;
 }
 
 .content__item {

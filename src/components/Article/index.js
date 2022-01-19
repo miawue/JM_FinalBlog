@@ -7,12 +7,13 @@ import heart from '../../img/heart.svg';
 import './Article.css';
 
 const Article = (props) => {
+
   return (
     <div className="article">
       <div className="article__head">
         <div>
           <div className="article__inner">
-            <Link to="/article" className="article__title">
+            <Link to="/article" className="article__title link">
               Some article title
             </Link>
             <div className="article__like-counter">
@@ -40,7 +41,7 @@ const Article = (props) => {
         <p className="article__text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.{' '}
+          consequat.
         </p>
       </div>
       {props.renderArticleContent ? props.renderArticleContent() : null}
