@@ -1,16 +1,15 @@
 /* eslint-disable */
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchArticles } from '../asyncAction/articles';
+import { connect } from 'react-redux';
 
-const App = () => {
-  const { articles, error, loading } = useSelector((state) => state.articleReducer);
-  console.log(articles);
+const App = ({ articles, error, loading, page }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchArticles());
-  }, []);
+    dispatch(fetchArticles(page));
+  }, [page]);
 
   if (loading) {
     return <h1>Идёт загрузка..</h1>;
@@ -29,4 +28,11 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  articles: state.articleReducer.articles,
+  loading: state.articleReducer.loading,
+  error: state.articleReducer.error,
+  page: state.articleReducer.page,
+});
+
+export default connect(mapStateToProps)(App);
