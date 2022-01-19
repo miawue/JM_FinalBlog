@@ -7,7 +7,6 @@ import Article from './Article';
 import ArticleContent from './ArticleContent';
 import { connect } from 'react-redux';
 
-
 const App = ({ articles, error, loading, page }) => {
   const dispatch = useDispatch();
 
@@ -31,7 +30,7 @@ const App = ({ articles, error, loading, page }) => {
         ))}
         <Routes>
           <Route path="/" element={<Article />} /> // внутри element будет вызов функции рендера статей
-          <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
+          <Route path="/article" element={<Article renderArticleContent={ArticleContent} />} />
         </Routes>
       </BrowserRouter>
     </div>
