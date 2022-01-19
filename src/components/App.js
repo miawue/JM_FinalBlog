@@ -3,9 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchArticles } from '../asyncAction/articles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Article from './Article';
-import ArticleContent from './ArticleContent';
 import { connect } from 'react-redux';
+import Article from './Article';
+import ArticleList from './ArticleList';
+import ArticleContent from './ArticleContent';
 
 
 const App = ({ articles, error, loading, page }) => {
@@ -26,11 +27,11 @@ const App = ({ articles, error, loading, page }) => {
   return (
     <div>
       <BrowserRouter>
-        {articles.map((article) => (
+        {/* {articles.map((article) => (
           <div>{article.name}</div>
-        ))}
+        ))} */}
         <Routes>
-          <Route path="/" element={<Article />} /> // внутри element будет вызов функции рендера статей
+          <Route path="/" element={<ArticleList />} /> 
           <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
         </Routes>
       </BrowserRouter>
