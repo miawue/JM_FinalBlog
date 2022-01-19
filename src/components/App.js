@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import Header from './Header';
 import Article from './Article';
+import ArticleList from './ArticleList';
 import ArticleContent from './ArticleContent';
 
 const App = ({ articles, error, loading, page }) => {
@@ -27,12 +28,14 @@ const App = ({ articles, error, loading, page }) => {
   return (
     <div>
       <BrowserRouter>
+
         {articles ? articles.map((article) => <div key={article.slug}>{article.title}</div>) : null}
+
         <Header />
         <div className="container">
           <Routes>
-            <Route path="/" element={<Article />} /> // внутри element будет вызов функции рендера статей
-            <Route path="/article" element={<Article renderArticleContent={ArticleContent} />} />
+            <Route path="/" element={<ArticleList />} /> 
+            <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
           </Routes>
         </div>
       </BrowserRouter>
