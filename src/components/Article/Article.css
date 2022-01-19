@@ -23,6 +23,7 @@
     font-size: 20px;
     line-height: 28px;
     color: #1890FF;
+    text-decoration: none;
 }
 
 .article__like-counter {

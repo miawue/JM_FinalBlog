@@ -31,7 +31,7 @@ const App = () => {
         ))}
         <Routes>
           <Route path="/" element={<Article />} /> // внутри element будет вызов функции рендера статей
-          <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} /> // при нажатии на заголовок выбранная статья кладется в state и здесь мы ее рендерим 
+          <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
         </Routes>
       </BrowserRouter>
     </div>
