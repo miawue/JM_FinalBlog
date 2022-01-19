@@ -12,7 +12,7 @@ const App = ({ articles, error, loading, page }) => {
 
   useEffect(() => {
     dispatch(fetchArticles(page));
-  }, [page]);
+  }, []);
 
   if (loading) {
     return <h1>Идёт загрузка..</h1>;
@@ -25,8 +25,8 @@ const App = ({ articles, error, loading, page }) => {
   return (
     <div>
       <BrowserRouter>
-        {articles.map((article) => (
-          <div>{article.name}</div>
+        {articles?.map((article) => (
+          <div key={article.slug}>{article.title}</div>
         ))}
         <Routes>
           <Route path="/" element={<Article />} /> // внутри element будет вызов функции рендера статей
@@ -38,7 +38,7 @@ const App = ({ articles, error, loading, page }) => {
 };
 
 const mapStateToProps = (state) => ({
-  articles: state.articleReducer.articles,
+  articles: state.articleReducer.articles.articles,
   loading: state.articleReducer.loading,
   error: state.articleReducer.error,
   page: state.articleReducer.page,

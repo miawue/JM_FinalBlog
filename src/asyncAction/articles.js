@@ -7,7 +7,7 @@ export const fetchArticles =
   (dispatch) => {
     dispatch({ type: FETCH_ARTICLES });
 
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('http://kata.academy:8022/api/articles')
       .then((response) => response.json())
       .then((response) => dispatch({ type: FETCH_ARTICLES_SUCCESS, payload: response }))
 
