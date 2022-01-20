@@ -8,6 +8,7 @@ import Header from './Header';
 import Article from './Article';
 import ArticleList from './ArticleList';
 import ArticleContent from './ArticleContent';
+import ArticleManager from './ArticleManager';
 
 const App = () => {
   
@@ -19,6 +20,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<ArticleList />} /> 
             <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
+            <Route path="/article-create" element={<ArticleManager />} />
+            <Route path="/article-edit" element={<ArticleManager />} />
           </Routes>
         </div>
       </BrowserRouter>
