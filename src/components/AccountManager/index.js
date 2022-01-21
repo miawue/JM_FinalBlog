@@ -50,9 +50,22 @@ const AccountManager = ({agreement = false, link = true}) => {
     }
 
     const renderLink = () => {
-        return (
-            <p className='sign-in-text'>Already have an account? <Link to="/sign-in" className='sign-in-link'>Sign In</Link></p>
-        )
+
+        if (window.location.pathname === '/create-acc') {
+            return (
+                <p className='sign-in-text'>
+                    Already have an account? <Link to="/sign-in" className='sign-in-link'>Sign In</Link>.
+                </p>
+            )
+        }
+
+        if (window.location.pathname === '/sign-in') {
+            return (
+                <p className='sign-in-text'>
+                    Don't have an account? <Link to="/create-acc" className='sign-in-link'>Sign Up</Link>.
+                </p>
+            )
+        }
     }
 
     const renderFields = () => {

@@ -22,7 +22,9 @@ const App = () => {
             <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
             <Route path="/article-create" element={<ArticleManager />} />
             <Route path="/article-edit" element={<ArticleManager />} />
-            <Route path="/create-acc" element={<AccountManager />} />
+            <Route path="/create-acc" element={<AccountManager agreement={true}/>} />
+            <Route path="/sign-in" element={<AccountManager />} />
+            <Route path="/edit-acc" element={<AccountManager link={false}/>} />
           </Routes>
 
       </BrowserRouter>
