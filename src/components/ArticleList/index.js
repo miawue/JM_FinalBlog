@@ -30,7 +30,7 @@ const ArticleList = ({ articles, error, loading, page }) => {
     }
 
     return (
-        <div>
+        <div className='container'>
             {renderArticle()}
         </div>
     )

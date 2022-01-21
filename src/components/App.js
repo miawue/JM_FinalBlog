@@ -9,6 +9,7 @@ import Article from './Article';
 import ArticleList from './ArticleList';
 import ArticleContent from './ArticleContent';
 import ArticleManager from './ArticleManager';
+import AccountManager from './AccountManager';
 
 const App = () => {
   
@@ -16,14 +17,14 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Header />
-        <div className="container">
           <Routes>
             <Route path="/" element={<ArticleList />} /> 
             <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
             <Route path="/article-create" element={<ArticleManager />} />
             <Route path="/article-edit" element={<ArticleManager />} />
+            <Route path="/create-acc" element={<AccountManager />} />
           </Routes>
-        </div>
+
       </BrowserRouter>
     </div>
   );
