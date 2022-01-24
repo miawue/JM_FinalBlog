@@ -23,12 +23,12 @@ export const fetchArticles =
       .catch((err) => dispatch({ type: FETCH_ARTICLES_ERROR, payload: `Ошибка при запросе данных ${err}` }));
   };
 
-export const fetchOneArticle = () => (dispatch) => {
+export const fetchOneArticle = (slug) => (dispatch) => {
   dispatch({ type: FETCH_ONE_ARTICLE });
 
-  fetch(`http://kata.academy:8022/api/articles/hello-kitty-6498pk`)
+  fetch(`http://kata.academy:8022/api/articles/${slug}`)
     .then((res) => res.json())
-    .then((res) => dispatch({ type: FETCH_ONE_ARTICLE_SUCCESS, payload: res }))
+    .then((res) => dispatch({ type: FETCH_ONE_ARTICLE_SUCCESS, payload: [res.article] }))
 
     .catch((err) => dispatch({ type: FETCH_ONE_ARTICLE_ERROR, payload: `Ошибка при запросе данных ${err}` }));
 };
