@@ -12,28 +12,24 @@ import ArticleManager from './ArticleManager';
 import AccountManager from './AccountManager';
 
 const App = () => {
-  
   return (
     <div>
       <BrowserRouter>
         <Header />
-          <Routes>
-            <Route path="/" element={<ArticleList />} /> 
-            <Route path="/article" element={<Article renderArticleContent={ArticleContent}/>} />
-            <Route path="/article-create" element={<ArticleManager />} />
-            <Route path="/article-edit" element={<ArticleManager />} />
-            <Route path="/create-acc" element={<AccountManager agreement={true}/>} />
-            <Route path="/sign-in" element={<AccountManager />} />
-            <Route path="/edit-acc" element={<AccountManager link={false}/>} />
-          </Routes>
-
+        <Routes>
+          <Route path="/" element={<ArticleList />} />
+          <Route path="/article" element={<Article renderArticleContent={ArticleContent} />} />
+          <Route path="/article-create" element={<ArticleManager />} />
+          <Route path="/article-edit" element={<ArticleManager />} />
+          <Route path="/create-acc" element={<AccountManager agreement={true} />} />
+          <Route path="/sign-in" element={<AccountManager />} />
+          <Route path="/edit-acc" element={<AccountManager link={false} />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  
-});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps)(App);

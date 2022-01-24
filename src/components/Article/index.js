@@ -2,24 +2,25 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import avatar from '../../img/avatar.png';
 import heart from '../../img/heart.svg';
 import './Article.css';
 
-const Article = ({article, renderArticleContent}) => {
-
+const Article = ({ article, renderArticleContent }) => {
   const convertDate = () => {
-    const options = {month: 'long', day: 'numeric', year: 'numeric'};
-    
-    const newDate = new Date(article.createdAt).toLocaleDateString('ru-RU', options);
-    return newDate
-  }
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+
+    return new Date(article.createdAt).toLocaleDateString('ru-RU', options);
+  };
 
   const renderArticleTags = () => {
     return article.tagList.map((tag, i) => {
-      return <li className="article__tag" key={i}>{tag}</li>
-    })
-  }
+      return (
+        <li className="article__tag" key={i}>
+          {tag}
+        </li>
+      );
+    });
+  };
 
   return (
     <div className="container">
@@ -39,9 +40,7 @@ const Article = ({article, renderArticleContent}) => {
                 </label>
               </div>
             </div>
-            <ul className="article__tag-list list">
-              {renderArticleTags()}
-            </ul>
+            <ul className="article__tag-list list">{renderArticleTags()}</ul>
           </div>
           <div className="article__author author">
             <div>
@@ -53,9 +52,9 @@ const Article = ({article, renderArticleContent}) => {
             </div>
           </div>
           <p className="article__text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
           </p>
         </div>
         {renderArticleContent ? renderArticleContent() : null}
