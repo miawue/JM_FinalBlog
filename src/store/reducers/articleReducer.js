@@ -1,6 +1,12 @@
 /* eslint-disable */
 
-import { FETCH_ARTICLES, FETCH_ARTICLES_ERROR, FETCH_ARTICLES_SUCCESS, SET_ARTICLES_PAGE } from '../types';
+import {
+  FETCH_ARTICLES,
+  FETCH_ARTICLES_ERROR,
+  FETCH_ARTICLES_SUCCESS,
+  SET_ARTICLES_PAGE,
+  SET_ONE_ARTICLE,
+} from '../types';
 
 const initialState = {
   articles: [],
@@ -22,6 +28,9 @@ export const articleReducer = (state = initialState, action) => {
 
     case SET_ARTICLES_PAGE:
       return { ...state, page: action.payload };
+
+    case SET_ONE_ARTICLE:
+      return { ...state, oneArticle: action.payload };
 
     default:
       return state;

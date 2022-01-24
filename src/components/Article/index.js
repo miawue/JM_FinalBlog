@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import heart from '../../img/heart.svg';
 import './Article.css';
 
-const Article = ({ article, renderArticleContent }) => {
+const Article = ({ article, renderArticleContent, onClick }) => {
   const convertDate = () => {
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
 
@@ -23,7 +23,7 @@ const Article = ({ article, renderArticleContent }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container" onClick={onClick}>
       <div className="article">
         <div className="article__head">
           <div>

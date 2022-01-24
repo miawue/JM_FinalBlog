@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchArticles, setArticlesPage } from '../../asyncAction/articles';
+import { fetchArticles, setArticlesPage, setOneArticlePage } from '../../asyncAction/articles';
 import { connect } from 'react-redux';
 import Pagination from '@mui/material/Pagination';
 
@@ -28,7 +28,15 @@ const ArticleList = ({ articles, error, loading, page, totalPages }) => {
   }
 
   const renderArticle = () => {
-    return articles ? articles.map((article) => <Article key={article.slug} article={article} />) : null;
+    return articles
+      ? articles.map((article) => (
+          <Article
+            onClick={() => dispatch(setOneArticlePage(articles.filter((el) => el.slug === article.slug)))}
+            key={article.slug}
+            article={article}
+          />
+        ))
+      : null;
   };
 
   return (
