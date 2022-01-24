@@ -11,7 +11,7 @@ const Header = () => {
         <Link to="/sign-in" className="header__sign-in link">
           Sign In
         </Link>
-        <Link to="/sign-up" className="header__sign-up link">
+        <Link to="/create-acc" className="header__sign-up link">
           Sign Up
         </Link>
       </div>

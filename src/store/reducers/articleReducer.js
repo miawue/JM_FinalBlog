@@ -33,7 +33,7 @@ export const articleReducer = (state = initialState, action) => {
       return { ...state, page: action.payload };
 
     case SET_ONE_ARTICLE:
-      return { ...state, oneArticle: action.payload };
+  return { ...state, oneArticle: action.payload };
 
     case FETCH_ONE_ARTICLE:
       return { ...state, loading: true, error: null };
