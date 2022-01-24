@@ -109,3 +109,43 @@
     line-height: 22px;
     color: rgba(0, 0, 0, 0.75);
 }
+
+.content {
+    margin-top: 25px;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.content__title {
+    margin: 0 0 7px 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+
+}
+
+.content__subtitle {
+    margin: 0 0 0 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.content__text {
+    margin: 0 0 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.content__list {
+    margin: 10px 0;
+    padding: 0 0 0 15px;
+    list-style: decimal;
+}
+
+.content__item {
+    margin: 0;
+}

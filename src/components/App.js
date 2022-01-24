@@ -1,24 +1,33 @@
 /* eslint-disable */
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import Header from './Header';
 import Article from './Article';
 import ArticleList from './ArticleList';
-import ArticleContent from './ArticleContent';
 import ArticleManager from './ArticleManager';
 import AccountManager from './AccountManager';
+import { fetchOneArticle } from '../asyncAction/articles';
 
-const App = () => {
+const App = ({ article }) => {
+  // console.log(window.location.pathname.slice(10));
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOneArticle());
+  }, []);
+
+  article = article ? article[0] : {};
+
   return (
     <div>
       <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<ArticleList />} />
-          <Route path="/article" element={<Article renderArticleContent={ArticleContent} />} />
+          <Route path={`/articles/${article?.slug}`} element={<Article article={article} />} />
           <Route path="/article-create" element={<ArticleManager />} />
           <Route path="/article-edit" element={<ArticleManager />} />
           <Route path="/create-acc" element={<AccountManager agreement={true} />} />
@@ -30,6 +39,8 @@ const App = () => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  article: state.articleReducer.oneArticle,
+});
 
 export default connect(mapStateToProps)(App);

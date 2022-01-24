@@ -4,6 +4,9 @@ import {
   FETCH_ARTICLES,
   FETCH_ARTICLES_ERROR,
   FETCH_ARTICLES_SUCCESS,
+  FETCH_ONE_ARTICLE,
+  FETCH_ONE_ARTICLE_ERROR,
+  FETCH_ONE_ARTICLE_SUCCESS,
   SET_ARTICLES_PAGE,
   SET_ONE_ARTICLE,
 } from '../store/types';
@@ -19,6 +22,16 @@ export const fetchArticles =
 
       .catch((err) => dispatch({ type: FETCH_ARTICLES_ERROR, payload: `Ошибка при запросе данных ${err}` }));
   };
+
+export const fetchOneArticle = () => (dispatch) => {
+  dispatch({ type: FETCH_ONE_ARTICLE });
+
+  fetch(`http://kata.academy:8022/api/articles/hello-kitty-6498pk`)
+    .then((res) => res.json())
+    .then((res) => dispatch({ type: FETCH_ONE_ARTICLE_SUCCESS, payload: res }))
+
+    .catch((err) => dispatch({ type: FETCH_ONE_ARTICLE_ERROR, payload: `Ошибка при запросе данных ${err}` }));
+};
 
 export function setArticlesPage(page) {
   return { type: SET_ARTICLES_PAGE, payload: page };

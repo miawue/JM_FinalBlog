@@ -1,11 +1,13 @@
 /* eslint-disable */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import heart from '../../img/heart.svg';
 import './Article.css';
+import { useDispatch } from 'react-redux';
+import { fetchOneArticle } from '../../asyncAction/articles';
 
-const Article = ({ article, renderArticleContent, onClick }) => {
+const Article = ({ article, onClick }) => {
   const convertDate = () => {
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
 
@@ -22,13 +24,24 @@ const Article = ({ article, renderArticleContent, onClick }) => {
     });
   };
 
+  const renderArticleContent = () => {
+    if (window.location.pathname === `/articles/${article.slug}`) {
+      return (
+        <div className="content">
+          <h3 className="content__title">{article.title}</h3>
+          {article.body}
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="container" onClick={onClick}>
       <div className="article">
         <div className="article__head">
           <div>
             <div className="article__inner">
-              <Link to="/article" className="article__title link">
+              <Link to={`/articles/${article.slug}`} className="article__title link">
                 {article.title}
               </Link>
               <div className="article__like-counter">
@@ -51,13 +64,9 @@ const Article = ({ article, renderArticleContent, onClick }) => {
               <img src={article.author.image} alt="avatar" className="author__avatar" />
             </div>
           </div>
-          <p className="article__text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </p>
+          <p className="article__text">{article.description}</p>
         </div>
-        {renderArticleContent ? renderArticleContent() : null}
+        {renderArticleContent()}
       </div>
     </div>
   );
