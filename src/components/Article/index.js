@@ -1,12 +1,11 @@
 /* eslint-disable */
 
-import React, { useEffect } from 'react';
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import heart from '../../img/heart.svg';
 import './Article.css';
-import { useDispatch } from 'react-redux';
-import { fetchOneArticle } from '../../asyncAction/articles';
 
 const Article = ({ article, onClick }) => {
   const convertDate = () => {
@@ -18,7 +17,7 @@ const Article = ({ article, onClick }) => {
   const renderArticleTags = () => {
     return article.tagList.map((tag, i) => {
       return (
-        <li className="article__tag" key={i}>
+        <li className="article__tag" key={uuidv4()}>
           {tag}
         </li>
       );
@@ -30,7 +29,7 @@ const Article = ({ article, onClick }) => {
       return (
         <div className="content">
           <h3 className="content__title">{article.title}</h3>
-          <ReactMarkdown>{article.body}</ReactMarkdown>
+          <ReactMarkdown children={article.body} />
         </div>
       );
     }
