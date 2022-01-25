@@ -111,6 +111,33 @@
     color: rgba(0, 0, 0, 0.75);
 }
 
+.manage-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.manage-buttons__button {
+    padding: 6px 17px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.manage-buttons__button_delete {
+    color: #f5222d;
+    border: 1px solid #f5222d;
+}
+
+.manage-buttons__button_edit {
+    color: #52c41a;
+    border: 1px solid #52c41a;
+    text-decoration: none;
+}
+
 .content {
     margin-top: 25px;
     color: rgba(0, 0, 0, 0.75);

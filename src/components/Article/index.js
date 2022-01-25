@@ -40,6 +40,16 @@ const Article = ({ article, onClick }) => {
     }
   };
 
+  const renderManageButtons = (/* передаем состояние логина */) => {
+    /* пишем условие if login true, возвращаем разметку */
+    return (
+      <div className='manage-buttons'>
+        <button className='manage-buttons__button manage-buttons__button_delete button'>Delete</button>
+        <Link to="/article-edit" className='manage-buttons__button manage-buttons__button_edit'>Edit</Link>
+      </div>
+    )
+  }
+
   return (
     <div className="container" onClick={onClick}>
       <div className="article">
@@ -70,6 +80,7 @@ const Article = ({ article, onClick }) => {
             </div>
           </div>
           <p className="article__text">{article.description}</p>
+          { window.location.pathname === `/articles/${article.slug}` ? renderManageButtons() : null}  
         </div>
         {renderArticleContent()}
       </div>
