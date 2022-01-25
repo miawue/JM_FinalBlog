@@ -11,13 +11,13 @@ import AccountManager from './AccountManager';
 import { fetchOneArticle } from '../asyncAction/articles';
 
 const App = ({ article }) => {
-  // console.log(window.location.pathname.slice(10));
+  
   const slug = window.location.pathname.slice(10).length !== 0 ? window.location.pathname.slice(10) : article?.slug;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchOneArticle(slug));
+    window.location.pathname === `/articles/${slug}` ? dispatch(fetchOneArticle(slug)) : null;
   }, []);
 
   article = article ? article[0] : {};

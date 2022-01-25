@@ -8,6 +8,7 @@ import heart from '../../img/heart.svg';
 import './Article.css';
 
 const Article = ({ article, onClick }) => {
+
   const convertDate = () => {
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
 
@@ -16,11 +17,13 @@ const Article = ({ article, onClick }) => {
 
   const renderArticleTags = () => {
     return article.tagList.map((tag, i) => {
-      return (
-        <li className="article__tag" key={uuidv4()}>
-          {tag}
-        </li>
-      );
+      if (tag !== "") {
+        return (
+          <li className="article__tag" key={uuidv4()}>
+            {tag}
+          </li>
+        );
+      }
     });
   };
 
@@ -29,7 +32,9 @@ const Article = ({ article, onClick }) => {
       return (
         <div className="content">
           <h3 className="content__title">{article.title}</h3>
-          <ReactMarkdown children={article.body} />
+          <div className="content__text">
+            <ReactMarkdown children={article.body} />
+          </div>
         </div>
       );
     }
