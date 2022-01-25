@@ -36,7 +36,3 @@ export const fetchOneArticle = (slug) => (dispatch) => {
 export function setArticlesPage(page) {
   return { type: SET_ARTICLES_PAGE, payload: page };
 }
-
-export function setOneArticlePage(article) {
-  return { type: SET_ONE_ARTICLE, payload: article };
-}

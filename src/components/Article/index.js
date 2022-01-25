@@ -8,7 +8,6 @@ import heart from '../../img/heart.svg';
 import './Article.css';
 
 const Article = ({ article, onClick }) => {
-
   const convertDate = () => {
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
 
@@ -17,7 +16,7 @@ const Article = ({ article, onClick }) => {
 
   const renderArticleTags = () => {
     return article.tagList.map((tag, i) => {
-      if (tag !== "") {
+      if (tag !== '') {
         return (
           <li className="article__tag" key={uuidv4()}>
             {tag}
@@ -43,12 +42,14 @@ const Article = ({ article, onClick }) => {
   const renderManageButtons = (/* передаем состояние логина */) => {
     /* пишем условие if login true, возвращаем разметку */
     return (
-      <div className='manage-buttons'>
-        <button className='manage-buttons__button manage-buttons__button_delete button'>Delete</button>
-        <Link to="/article-edit" className='manage-buttons__button manage-buttons__button_edit'>Edit</Link>
+      <div className="manage-buttons">
+        <button className="manage-buttons__button manage-buttons__button_delete button">Delete</button>
+        <Link to="/article-edit" className="manage-buttons__button manage-buttons__button_edit">
+          Edit
+        </Link>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="container" onClick={onClick}>
@@ -80,7 +81,7 @@ const Article = ({ article, onClick }) => {
             </div>
           </div>
           <p className="article__text">{article.description}</p>
-          { window.location.pathname === `/articles/${article.slug}` ? renderManageButtons() : null}  
+          {window.location.pathname === `/articles/${article.slug}` ? renderManageButtons() : null}
         </div>
         {renderArticleContent()}
       </div>

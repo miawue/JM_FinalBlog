@@ -11,7 +11,6 @@ import AccountManager from './AccountManager';
 import { fetchOneArticle } from '../asyncAction/articles';
 
 const App = ({ article }) => {
-  
   const slug = window.location.pathname.slice(10).length !== 0 ? window.location.pathname.slice(10) : article?.slug;
 
   const dispatch = useDispatch();
