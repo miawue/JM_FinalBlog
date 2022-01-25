@@ -19,10 +19,32 @@ const ArticleManager = () => {
     );
   };
 
+  const renderTitle = () => {
+    if (window.location.pathname === "/article-create") {
+      return (
+        <h2 className="manager__title">Create new article</h2>
+      );
+    }
+    if (window.location.pathname === "/article-edit") {
+      return (
+        <h2 className="manager__title">Edit article</h2>
+      );
+    }
+  }
+
+  const renderBtnText = () => {
+    if (window.location.pathname === "/article-create") {
+      return "Create"
+    }
+    if (window.location.pathname === "/article-edit") {
+      return "Edit"
+    }
+  }
+
   return (
     <div className="container">
       <div className="manager">
-        <h2 className="manager__title">Create new article</h2>
+        {renderTitle()}
         <form>
           <div className="manager__inner">
             <label className="manager__label" htmlFor="title">
@@ -51,7 +73,7 @@ const ArticleManager = () => {
             </ul>
           </div>
           <button type="submit" className="manager__button button">
-            Create
+            {renderBtnText()}
           </button>
         </form>
       </div>
