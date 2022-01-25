@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React, { useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import heart from '../../img/heart.svg';
 import './Article.css';
@@ -29,7 +30,7 @@ const Article = ({ article, onClick }) => {
       return (
         <div className="content">
           <h3 className="content__title">{article.title}</h3>
-          {article.body}
+          <ReactMarkdown>{article.body}</ReactMarkdown>
         </div>
       );
     }
