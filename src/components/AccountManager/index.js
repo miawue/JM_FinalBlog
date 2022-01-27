@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './AccountManager.css';
+import { connect } from 'react-redux';
 
 const AccountManager = ({ agreement = false, link = true }) => {
   const [state, setState] = useState({});
@@ -203,4 +204,10 @@ const AccountManager = ({ agreement = false, link = true }) => {
   );
 };
 
-export default AccountManager;
+const mapStateToProps = (state) => ({
+  username: state.userReducer.username,
+  email: state.userReducer.email,
+  password: state.userReducer.password,
+});
+
+export default connect(mapStateToProps)(AccountManager);

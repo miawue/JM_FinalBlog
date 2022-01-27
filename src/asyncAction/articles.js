@@ -8,7 +8,6 @@ import {
   FETCH_ONE_ARTICLE_ERROR,
   FETCH_ONE_ARTICLE_SUCCESS,
   SET_ARTICLES_PAGE,
-  SET_ONE_ARTICLE,
 } from '../store/types';
 
 export const fetchArticles =

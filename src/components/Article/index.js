@@ -15,7 +15,7 @@ const Article = ({ article, onClick }) => {
   };
 
   const renderArticleTags = () => {
-    return article.tagList.map((tag, i) => {
+    return article.tagList.map((tag) => {
       if (tag !== '') {
         return (
           <li className="article__tag" key={uuidv4()}>

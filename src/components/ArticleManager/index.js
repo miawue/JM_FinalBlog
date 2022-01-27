@@ -20,26 +20,22 @@ const ArticleManager = () => {
   };
 
   const renderTitle = () => {
-    if (window.location.pathname === "/article-create") {
-      return (
-        <h2 className="manager__title">Create new article</h2>
-      );
+    if (window.location.pathname === '/article-create') {
+      return <h2 className="manager__title">Create new article</h2>;
     }
-    if (window.location.pathname === "/article-edit") {
-      return (
-        <h2 className="manager__title">Edit article</h2>
-      );
+    if (window.location.pathname === '/article-edit') {
+      return <h2 className="manager__title">Edit article</h2>;
     }
-  }
+  };
 
   const renderBtnText = () => {
-    if (window.location.pathname === "/article-create") {
-      return "Create"
+    if (window.location.pathname === '/article-create') {
+      return 'Create';
     }
-    if (window.location.pathname === "/article-edit") {
-      return "Edit"
+    if (window.location.pathname === '/article-edit') {
+      return 'Edit';
     }
-  }
+  };
 
   return (
     <div className="container">
