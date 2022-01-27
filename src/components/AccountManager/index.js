@@ -1,12 +1,21 @@
 /* eslint-disable */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './AccountManager.css';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { registerUser } from '../../asyncAction/user';
 
 const AccountManager = ({ agreement = false, link = true }) => {
+  const dispatch = useDispatch();
+
+  const user = {
+    username: 'ASFKJqasfghquwgh12',
+    email: 'ASFKJqasfghqu12wgh@mail.ru',
+    password: 'ASFKJqasfghquwgh',
+  };
+
   const [state, setState] = useState({});
 
   const renderError = () => {
@@ -186,6 +195,7 @@ const AccountManager = ({ agreement = false, link = true }) => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    dispatch(registerUser(user));
     console.log(state);
   };
 

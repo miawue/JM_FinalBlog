@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchArticles, fetchOneArticle, setArticlesPage, setOneArticlePage } from '../../asyncAction/articles';
+import { fetchArticles, fetchOneArticle, setArticlesPage } from '../../asyncAction/articles';
 import { connect } from 'react-redux';
 import Pagination from '@mui/material/Pagination';
 
