@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import './AccountManager.css';
 import { connect, useDispatch } from 'react-redux';
 import { registerUser } from '../../asyncAction/user';
+import { useForm } from 'react-hook-form';
+import './AccountManager.css';
+import { validate } from 'uuid';
 
 const AccountManager = ({ agreement = false, link = true }) => {
   const dispatch = useDispatch();
@@ -16,19 +17,31 @@ const AccountManager = ({ agreement = false, link = true }) => {
     password: 'ASFKJqasfghquwgh',
   };
 
-  const [state, setState] = useState({});
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const renderError = () => {
-    return <p className="error">Field is empty</p>;
+  const renderError = (id) => {
+    switch (errors?.[id]?.type) {
+      case "required":
+        return <p className="error">Field is empty</p>;
+      case "pattern":
+        return <p className="error">Please write email address</p>;
+      case "minLength":
+        return <p className="error">{id} is too short</p>;
+      case "maxLength":
+        return <p className="error">{id} is too long</p>;
+    }
+
+    
   };
 
   const renderAgreement = () => {
     return (
       <div className="agreement">
-        <input type="checkbox" id="agreement" className="agreement__checkbox" onChange={(e) => onChangeInput(e)} />
+        <input type="checkbox" id="agreement" className="agreement__checkbox" {...register("Agreement", {required: true})} />
         <label htmlFor="agreement" className="agreement__label">
           I agree to the processing of my personal information
         </label>
+        { errors?.Agreement?.type === 'required' && <p className='error'>We need your agreement</p>}
       </div>
     );
   };
@@ -97,24 +110,28 @@ const AccountManager = ({ agreement = false, link = true }) => {
           type: 'text',
           id: 'username',
           placeholder: 'Username',
+          options: {required: true, minLength: 3, maxLength: 20,}
         },
         {
           name: 'Email address',
-          type: 'email',
+          type: 'text',
           id: 'email',
           placeholder: 'Email address',
+          options: {required: true, pattern: /\S+@\S+.\S+/, }
         },
         {
           name: 'Password',
           type: 'password',
           id: 'password',
           placeholder: 'Password',
+          options: {required: true, minLength: 6, maxLength: 40,}
         },
         {
           name: 'Repeat Password',
           type: 'password',
           id: 'repeatPassword',
           placeholder: 'Password',
+          options: {required: true, minLength: 6, maxLength: 40,}
         },
       ];
     }
@@ -126,12 +143,14 @@ const AccountManager = ({ agreement = false, link = true }) => {
           type: 'email',
           id: 'email',
           placeholder: 'Email address',
+          options: {required: true,}
         },
         {
           name: 'Password',
           type: 'password',
           id: 'password',
           placeholder: 'Password',
+          options: {required: true}
         },
       ];
     }
@@ -143,24 +162,28 @@ const AccountManager = ({ agreement = false, link = true }) => {
           type: 'text',
           id: 'username',
           placeholder: 'Username',
+          options: {required: true,}
         },
         {
           name: 'Email address',
           type: 'email',
           id: 'email',
           placeholder: 'Email address',
+          options: {required: true, pattern: /\S+@\S+.\S+/, }
         },
         {
           name: 'New Password',
           type: 'password',
           id: 'password',
           placeholder: 'New Password',
+          options: {required: true, minLength: 6, maxLength: 40,}
         },
         {
           name: 'Avatar image url()',
           type: 'text',
           id: 'avatar',
           placeholder: 'Avatar image',
+          options: {required: true,}
         },
       ];
     }
@@ -176,33 +199,23 @@ const AccountManager = ({ agreement = false, link = true }) => {
             type={field.type}
             id={field.id}
             placeholder={field.placeholder}
-            onChange={(e) => onChangeInput(e)}
+            {...register(field.name, field.options, {validate: e => console.log(e)})}
           />
-          {/* {renderError()} */}
+            {renderError(field.name)} 
         </div>
       );
     });
   };
 
-  const onChangeInput = (e) => {
-    if (e.target.type !== 'checkbox') {
-      e.preventDefault();
-      setState({ ...state, [e.target.id]: e.target.value });
-    } else {
-      setState({ ...state, [e.target.id]: e.target.checked });
-    }
-  };
-
-  const onFormSubmit = (e) => {
-    e.preventDefault();
-    dispatch(registerUser(user));
-    console.log(state);
+  const onFormSubmit = (data) => {
+    console.log(data);
+    //dispatch(registerUser(user));
   };
 
   return (
     <div className="account">
       {renderTitle()}
-      <form className="account__form" onSubmit={(e) => onFormSubmit(e)}>
+      <form className="account__form" onSubmit={handleSubmit(onFormSubmit)}>
         {renderFields()}
         {agreement ? renderAgreement() : null}
         <button className="account__button button" type="submit">

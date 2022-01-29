@@ -64,6 +64,10 @@
     color: #f5222d;
 }
 
+.error-field {
+    border-color: #f5222d;
+}
+
 .agreement {
     margin-bottom: 21px;
     padding-top: 8px;
