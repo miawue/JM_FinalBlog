@@ -11,8 +11,8 @@ const AccountManager = ({ agreement = false, link = true }) => {
   const dispatch = useDispatch();
 
   const user = {
-    username: 'ASFKJqasfghquwgh12',
-    email: 'ASFKJqasfghqu12wgh@mail.ru',
+    username: 'ASFKJqashquwgh12',
+    email: 'ASFKJqasfghqu12w@mail.ru',
     password: 'ASFKJqasfghquwgh',
   };
 
