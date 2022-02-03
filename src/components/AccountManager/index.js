@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
-import { loginUser, registerUser } from '../../asyncAction/user';
+import { loginUser, registerUser, updateUser } from '../../asyncAction/user';
 import { useForm } from 'react-hook-form';
 import './AccountManager.css';
+import { getToken } from '../../store/actions';
 
 const AccountManager = ({ agreement = false, link = true, authErrors, user }) => {
   const dispatch = useDispatch();
@@ -229,11 +230,15 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user }) =>
       username: data.Username,
       email: data['Email address'],
       password: data.Password,
+      img: data['Avatar image url()'],
     };
+    console.log(user);
     if (path === '/create-acc') {
       await dispatch(registerUser(user));
     } else if (path === '/sign-in') {
       await dispatch(loginUser(user));
+    } else if (path === '/edit-acc') {
+      await dispatch(updateUser(user));
     }
   };
 
