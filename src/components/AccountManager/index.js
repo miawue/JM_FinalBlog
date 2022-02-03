@@ -20,15 +20,25 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user }) =>
   } = useForm();
 
   const renderError = (id) => {
+    
+    const field = errors?.[id]?.ref;
+
     switch (errors?.[id]?.type) {
       case 'required':
+        field.style.borderColor = 'red';
         return <p className="error">Field is empty</p>;
       case 'pattern':
+        field.style.borderColor = 'red';
         return <p className="error">Please write email address</p>;
       case 'minLength':
+        field.style.borderColor = 'red';
         return <p className="error">{id} is too short</p>;
       case 'maxLength':
+        field.style.borderColor = 'red';
         return <p className="error">{id} is too long</p>;
+      case 'validate':
+        field.style.borderColor = 'red';
+        return <p className="error">Password mismatch</p>;
     }
   };
 
