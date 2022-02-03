@@ -15,10 +15,10 @@ import {
 
 const initialState = {
   user: {
-    email: JSON.parse(localStorage.getItem('user'))?.email,
-    token: JSON.parse(localStorage.getItem('user'))?.token,
-    username: JSON.parse(localStorage.getItem('user'))?.username,
-    image: 'https://api.realworld.io/images/smiley-cyrus.jpeg',
+    email: JSON.parse(localStorage.getItem('user'))?.email || null,
+    token: JSON.parse(localStorage.getItem('user'))?.token || null,
+    username: JSON.parse(localStorage.getItem('user'))?.username || null,
+    image: JSON.parse(localStorage.getItem('user'))?.image || 'https://api.realworld.io/images/smiley-cyrus.jpeg',
   },
   response: {
     errors: null,
@@ -54,10 +54,10 @@ export const userReducer = (state = initialState, action) => {
       return { ...state, loading: false, user: action.payload };
 
     case UPDATE_USER_ERROR:
-      return { ...state, loading: false, user: action.payload };
+      return { ...state, loading: false, error: action.payload };
 
     case LOG_OUT:
-      localStorage.removeItem('user');
+      localStorage.clear();
       return { ...state, user: {} };
 
     default:

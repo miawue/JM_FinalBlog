@@ -230,14 +230,15 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user }) =>
       username: data.Username,
       email: data['Email address'],
       password: data.Password,
-      img: data['Avatar image url()'],
+      token: getToken().slice(6),
+      image: data['Avatar image url()'],
     };
-    console.log(user);
     if (path === '/create-acc') {
       await dispatch(registerUser(user));
     } else if (path === '/sign-in') {
       await dispatch(loginUser(user));
     } else if (path === '/edit-acc') {
+      localStorage.setItem('user', JSON.stringify({ ...user, image: user.image }));
       await dispatch(updateUser(user));
     }
   };
