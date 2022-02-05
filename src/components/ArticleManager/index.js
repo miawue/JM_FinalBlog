@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import './ArticleManager.css';
 
 const ArticleManager = () => {
-
   const {
     register,
     handleSubmit,
@@ -19,27 +18,31 @@ const ArticleManager = () => {
     if (tagsArr.length === 0) {
       return (
         <li className="tag">
-         <input type="text" className="manager__input" placeholder="Tag" />
-         <button className="tag__button tag__button_disabled button" type="button" disabled>
-           Delete
-         </button>
-         <button className="tag__button tag__button_add button" type="button">
-           Add tag
-         </button>
-       </li>
+          <input type="text" className="manager__input" placeholder="Tag" />
+          <button className="tag__button tag__button_disabled button" type="button" disabled>
+            Delete
+          </button>
+          <button className="tag__button tag__button_add button" type="button">
+            Add tag
+          </button>
+        </li>
       );
-    } 
-    
+    }
+
     return tagsArr.map((el, i) => {
-        return (
-          <li className="tag" key={i}>
-            <input type="text" className="manager__input" placeholder="Tag" defaultValue={el}/>
-            <button className="tag__button tag__button_delete button" type="button">
-              Delete
+      return (
+        <li className="tag" key={i}>
+          <input type="text" className="manager__input" placeholder="Tag" defaultValue={el} />
+          <button className="tag__button tag__button_delete button" type="button">
+            Delete
+          </button>
+          {i === tagsArr.length - 1 ? (
+            <button className="tag__button tag__button_add button" type="button">
+              Add tag
             </button>
-            { i === tagsArr.length - 1 ? <button className="tag__button tag__button_add button" type="button">Add tag</button> : null }
-          </li>
-        );
+          ) : null}
+        </li>
+      );
     });
   };
 
