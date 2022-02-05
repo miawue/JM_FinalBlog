@@ -20,7 +20,6 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user }) =>
   } = useForm();
 
   const renderError = (id) => {
-    
     const field = errors?.[id]?.ref;
 
     switch (errors?.[id]?.type) {

@@ -15,7 +15,7 @@ import { getToken } from '../store/actions';
 export const registerUser = (user) => (dispatch) => {
   dispatch({ type: REGISTER_USER });
 
-  fetch('http://kata.academy:8022/api/users', {
+  fetch('https://api.realworld.io/api/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -31,7 +31,7 @@ export const registerUser = (user) => (dispatch) => {
 export const loginUser = (user) => (dispatch) => {
   dispatch({ type: LOGIN_USER });
 
-  fetch('http://kata.academy:8022/api/users/login', {
+  fetch('https://api.realworld.io/api/users/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -47,7 +47,7 @@ export const loginUser = (user) => (dispatch) => {
 export const updateUser = (user) => (dispatch) => {
   dispatch({ type: UPDATE_USER });
 
-  fetch('http://kata.academy:8022/api/user', {
+  fetch('https://api.realworld.io/api/user', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
