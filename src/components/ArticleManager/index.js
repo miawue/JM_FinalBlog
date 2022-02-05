@@ -1,22 +1,46 @@
 /* eslint-disable */
 
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 import './ArticleManager.css';
 
 const ArticleManager = () => {
-  const renderTagField = () => {
-    return (
-      <li className="tag">
-        <input type="text" className="manager__input" placeholder="Tag" />
-        <button className="tag__button tag__button_delete button" type="button">
-          Delete
-        </button>
-        <button className="tag__button tag__button_add button" type="button">
-          Add tag
-        </button>
-      </li>
-    );
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const tagsArr = [];
+
+  const renderTagFields = (tagsArr) => {
+    if (tagsArr.length === 0) {
+      return (
+        <li className="tag">
+         <input type="text" className="manager__input" placeholder="Tag" />
+         <button className="tag__button tag__button_disabled button" type="button" disabled>
+           Delete
+         </button>
+         <button className="tag__button tag__button_add button" type="button">
+           Add tag
+         </button>
+       </li>
+      );
+    } 
+    
+    return tagsArr.map((el, i) => {
+        return (
+          <li className="tag" key={i}>
+            <input type="text" className="manager__input" placeholder="Tag" defaultValue={el}/>
+            <button className="tag__button tag__button_delete button" type="button">
+              Delete
+            </button>
+            { i === tagsArr.length - 1 ? <button className="tag__button tag__button_add button" type="button">Add tag</button> : null }
+          </li>
+        );
+    });
   };
 
   const renderTitle = () => {
@@ -65,7 +89,7 @@ const ArticleManager = () => {
               Tags
             </label>
             <ul id="tags" className="list">
-              {renderTagField()}
+              {renderTagFields(tagsArr)}
             </ul>
           </div>
           <button type="submit" className="manager__button button">
