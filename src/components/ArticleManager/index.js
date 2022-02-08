@@ -6,47 +6,37 @@ import { useForm } from 'react-hook-form';
 import './ArticleManager.css';
 
 const ArticleManager = () => {
+  const [tags, setTags] = useState([]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const [tags, setTags] = useState([]);
-
-  //console.log(tags);
-
   const addTagFunc = (e) => {
-    e.target.parentElement.firstChild.value !== '' ? setTags([...tags, e.target.parentElement.firstChild.value]) : null
+    if (e.target.parentElement.firstChild.value.trim() !== '') {
+      if (!tags.includes(e.target.parentElement.firstChild.value.trim())) {
+        setTags([...tags, e.target.parentElement.firstChild.value.trim()]);
+      }
+      e.target.parentElement.firstChild.value = '';
+    }
   }
 
   const removeTagFunc = (e) => {
-    e.target.parentElement.firstChild.value !== '' ? setTags(tags.filter(tag => tag !== e.target.parentElement.firstChild.value)) : null
+    if (e.target.parentElement.firstChild.value !== '') {
+      setTags(tags.filter(tag => tag !== e.target.parentElement.firstChild.value))
+    }
   }
 
   const renderTagFields = (tagsArr) => {
-    if (tagsArr.length === 0) {
-      return (
-        <li className="tag">
-          <input type="text" className="manager__input" placeholder="Tag" />
-          <button className="tag__button tag__button_disabled button" type="button" disabled>
-            Delete
-          </button>
-          <button className="tag__button tag__button_add button" type="button" onClick={(e) => addTagFunc(e)}>
-            Add tag
-          </button>
-        </li>
-      );
-    }
-
-    return tagsArr.map((el, i) => {
+    return tagsArr.map((el) => {
         return (
-          <li className="tag" key={i}>
-            <input type="text" className="manager__input" placeholder="Tag"/>
+          <li className="tag" key={el}>
+            <input type="text" className="manager__input" placeholder="Tag" defaultValue={el}/>
             <button className="tag__button tag__button_delete button" type="button" onClick={(e) => removeTagFunc(e)}>
               Delete
             </button>
-            { i === tagsArr.length - 1 ? <button className="tag__button tag__button_add button" type="button" onClick={(e) => addTagFunc(e)}>Add tag</button> : null }
           </li>
         );
     });
@@ -117,6 +107,15 @@ const ArticleManager = () => {
             </label>
             <ul id="tags" className="list">
               {renderTagFields(tags)}
+              <li className="tag">
+                <input type="text" className="manager__input" placeholder="Tag" />
+                <button className="tag__button tag__button_disabled button" type="button" disabled>
+                  Delete
+                </button>
+                <button className="tag__button tag__button_add button" type="button" onClick={(e) => addTagFunc(e)}>
+                  Add tag
+                </button>
+              </li>
             </ul>
           </div>
           <button type="submit" className="manager__button button">
