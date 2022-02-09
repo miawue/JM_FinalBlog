@@ -1,11 +1,15 @@
 /* eslint-disable */
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { v4 as uuidv4 } from 'uuid';
 import './ArticleManager.css';
+import { createArticle } from '../../asyncAction/customArticle';
+import { useDispatch } from 'react-redux';
 
 const ArticleManager = () => {
+  const path = window.location.pathname;
+  const dispatch = useDispatch();
   const [tags, setTags] = useState([]);
 
   const {
@@ -21,47 +25,46 @@ const ArticleManager = () => {
       }
       e.target.parentElement.firstChild.value = '';
     }
-  }
+  };
 
   const removeTagFunc = (e) => {
     if (e.target.parentElement.firstChild.value !== '') {
-      setTags(tags.filter(tag => tag !== e.target.parentElement.firstChild.value))
+      setTags(tags.filter((tag) => tag !== e.target.parentElement.firstChild.value));
     }
-  }
+  };
 
   const renderTagFields = (tagsArr) => {
     return tagsArr.map((el) => {
-        return (
-          <li className="tag" key={el}>
-            <input type="text" className="manager__input" placeholder="Tag" defaultValue={el}/>
-            <button className="tag__button tag__button_delete button" type="button" onClick={(e) => removeTagFunc(e)}>
-              Delete
-            </button>
-          </li>
-        );
+      return (
+        <li className="tag" key={uuidv4()}>
+          <input type="text" className="manager__input" placeholder="Tag" defaultValue={el} />
+          <button className="tag__button tag__button_delete button" type="button" onClick={(e) => removeTagFunc(e)}>
+            Delete
+          </button>
+        </li>
+      );
     });
   };
 
   const renderTitle = () => {
-    if (window.location.pathname === '/article-create') {
+    if (path === '/article-create') {
       return <h2 className="manager__title">Create new article</h2>;
     }
-    if (window.location.pathname === '/article-edit') {
+    if (path === '/article-edit') {
       return <h2 className="manager__title">Edit article</h2>;
     }
   };
 
   const renderBtnText = () => {
-    if (window.location.pathname === '/article-create') {
+    if (path === '/article-create') {
       return 'Create';
     }
-    if (window.location.pathname === '/article-edit') {
+    if (path === '/article-edit') {
       return 'Edit';
     }
   };
 
   const renderError = (name) => {
-    
     const field = errors?.[name]?.ref;
 
     switch (errors?.[name]?.type) {
@@ -72,8 +75,9 @@ const ArticleManager = () => {
   };
 
   const onFormSubmit = (data) => {
-    console.log({...data, tags: tags});
-  }
+    const article = { ...data, tagList: tags };
+    dispatch(createArticle(article));
+  };
 
   return (
     <div className="container">
@@ -84,21 +88,39 @@ const ArticleManager = () => {
             <label className="manager__label" htmlFor="title">
               Title
             </label>
-            <input type="text" className="manager__input" id="title" placeholder="Title" {...register("title", {required : true})} />
+            <input
+              type="text"
+              className="manager__input"
+              id="title"
+              placeholder="Title"
+              {...register('title', { required: true })}
+            />
             {renderError('title')}
           </div>
           <div className="manager__inner">
             <label className="manager__label" htmlFor="description">
               Short description
             </label>
-            <input type="text" className="manager__input" id="description" placeholder="Description" {...register("description", {required : true})}/>
+            <input
+              type="text"
+              className="manager__input"
+              id="description"
+              placeholder="Description"
+              {...register('description', { required: true })}
+            />
             {renderError('description')}
           </div>
           <div className="manager__inner">
             <label className="manager__label" htmlFor="content">
               Text
             </label>
-            <textarea type="text" className="manager__textarea" id="content" placeholder="Text" {...register("content", {required : true})}/>
+            <textarea
+              type="text"
+              className="manager__textarea"
+              id="content"
+              placeholder="Text"
+              {...register('content', { required: true })}
+            />
             {renderError('content')}
           </div>
           <div className="manager__inner">

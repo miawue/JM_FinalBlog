@@ -15,7 +15,7 @@ export const fetchArticles =
   (dispatch) => {
     dispatch({ type: FETCH_ARTICLES });
 
-    fetch(`https://api.realworld.io/api/articles?limit=5&offset=${page > 1 ? page * 5 : 0}`)
+    fetch(`http://kata.academy:8022/api/articles?limit=5&offset=${page > 1 ? page * 5 : 0}`)
       .then((response) => response.json())
       .then((response) => dispatch({ type: FETCH_ARTICLES_SUCCESS, payload: response }))
 
@@ -25,7 +25,7 @@ export const fetchArticles =
 export const fetchOneArticle = (slug) => (dispatch) => {
   dispatch({ type: FETCH_ONE_ARTICLE });
 
-  fetch(`https://api.realworld.io/api/articles/${slug}`)
+  fetch(`http://kata.academy:8022/api/articles/${slug}`)
     .then((res) => res.json())
     .then((res) => dispatch({ type: FETCH_ONE_ARTICLE_SUCCESS, payload: [res.article] }))
 
