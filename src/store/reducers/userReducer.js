@@ -26,6 +26,7 @@ const initialState = {
   },
   loading: false,
   error: null,
+  canRedirect: false,
 };
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -33,7 +34,7 @@ export const userReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case REGISTER_USER_SUCCESS:
-      return { ...state, loading: false, error: null, response: action.payload };
+      return { ...state, loading: false, error: null, response: action.payload, canRedirect: true };
 
     case REGISTER_USER_ERROR:
       return { ...state, loading: false, error: action.payload };
@@ -42,7 +43,7 @@ export const userReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case LOGIN_USER_SUCCESS:
-      return { ...state, loading: false, user: action.payload };
+      return { ...state, loading: false, user: action.payload, canRedirect: true };
 
     case LOGIN_USER_ERROR:
       return { ...state, loading: false, error: action.payload };

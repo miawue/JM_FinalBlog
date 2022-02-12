@@ -1,15 +1,16 @@
 /* eslint-disable */
 
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { loginUser, registerUser, updateUser } from '../../asyncAction/user';
 import { useForm } from 'react-hook-form';
 import './AccountManager.css';
-import { getToken } from '../../store/actions';
+import { getToken, redirectUser } from '../../store/actions';
 
-const AccountManager = ({ agreement = false, link = true, authErrors, user }) => {
+const AccountManager = ({ agreement = false, link = true, authErrors, user, canRedirect }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   user?.token ? localStorage.setItem('user', JSON.stringify(user)) : null;
   const path = window.location.pathname;
 
@@ -234,6 +235,11 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user }) =>
     });
   };
 
+  if (canRedirect) {
+    navigate('/');
+    window.location.reload();
+  }
+
   const onFormSubmit = async (data) => {
     const user = {
       username: data.Username,
@@ -242,11 +248,11 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user }) =>
       token: getToken().slice(6),
       image: data['Avatar image url()'],
     };
-    if (path === '/create-acc') {
+    if (path === '/create-acc' && !authErrors) {
       await dispatch(registerUser(user));
-    } else if (path === '/sign-in') {
+    } else if (path === '/sign-in' && !authErrors) {
       await dispatch(loginUser(user));
-    } else if (path === '/edit-acc') {
+    } else if (path === '/edit-acc' && !authErrors) {
       localStorage.setItem('user', JSON.stringify({ ...user, image: user.image }));
       await dispatch(updateUser(user));
     }
@@ -274,6 +280,7 @@ const mapStateToProps = (state) => ({
   email: state.userReducer.email,
   password: state.userReducer.password,
   authErrors: state.userReducer.response.errors || state.userReducer.user.errors,
+  canRedirect: state.userReducer.canRedirect,
 });
 
 export default connect(mapStateToProps)(AccountManager);

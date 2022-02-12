@@ -4,11 +4,14 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import './ArticleManager.css';
-import { createArticle } from '../../asyncAction/customArticle';
-import { useDispatch } from 'react-redux';
+import { createArticle, editArticle } from '../../asyncAction/customArticle';
+import { useDispatch, connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const ArticleManager = () => {
+const ArticleManager = ({ article }) => {
   const path = window.location.pathname;
+  const slug = article ? article[0]?.slug : null;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [tags, setTags] = useState([]);
 
@@ -75,8 +78,10 @@ const ArticleManager = () => {
   };
 
   const onFormSubmit = (data) => {
-    const article = { ...data, tagList: tags };
-    dispatch(createArticle(article));
+    const customArticle = { ...data, tagList: tags };
+    path === '/article-create' ? dispatch(createArticle(customArticle)) : dispatch(editArticle(customArticle, slug));
+    navigate('/');
+    window.location.reload();
   };
 
   return (
@@ -149,4 +154,8 @@ const ArticleManager = () => {
   );
 };
 
-export default ArticleManager;
+const mapStateToProps = (state) => ({
+  article: state.articleReducer.oneArticle,
+});
+
+export default connect(mapStateToProps)(ArticleManager);

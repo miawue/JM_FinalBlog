@@ -8,7 +8,9 @@ import heart from '../../img/heart.svg';
 import './Article.css';
 
 const Article = ({ article, onClick }) => {
-  const isArticleMine = article ? article.author.username === JSON.parse(localStorage.getItem('user')).username : false;
+  const isArticleMine = article
+    ? article.author.username === JSON.parse(localStorage.getItem('user'))?.username
+    : false;
   const convertDate = () => {
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
 
