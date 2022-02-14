@@ -9,6 +9,7 @@ import heartRed from '../../img/heartRed.svg';
 import './Article.css';
 import { dislikeArticle, likeArticle } from '../../asyncAction/articles';
 import { deleteArticle } from '../../asyncAction/customArticle';
+import { getToken } from '../../store/actions';
 
 const Article = ({ article, onClick, canRedirect }) => {
   const dispatch = useDispatch();
@@ -108,6 +109,7 @@ const Article = ({ article, onClick, canRedirect }) => {
               </Link>
               <div className="article__like-counter">
                 <button
+                  disabled={getToken() === 'Token undefined'}
                   className="article__like-btn button"
                   id="like"
                   onClick={() =>
