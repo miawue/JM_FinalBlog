@@ -81,7 +81,6 @@ const ArticleManager = ({ article }) => {
     const customArticle = { ...data, tagList: tags };
     path === '/article-create' ? dispatch(createArticle(customArticle)) : dispatch(editArticle(customArticle, slug));
     navigate('/');
-    window.location.reload();
   };
 
   return (
