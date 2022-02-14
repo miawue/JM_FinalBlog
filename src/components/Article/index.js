@@ -5,9 +5,13 @@ import { v4 as uuidv4 } from 'uuid';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import heart from '../../img/heart.svg';
+import heartRed from '../../img/heartRed.svg';
 import './Article.css';
+import { dislikeArticle, likeArticle } from '../../asyncAction/articles';
+import { useDispatch } from 'react-redux';
 
 const Article = ({ article, onClick }) => {
+  const dispatch = useDispatch();
   const isArticleMine = article
     ? article.author.username === JSON.parse(localStorage.getItem('user'))?.username
     : false;
@@ -56,20 +60,26 @@ const Article = ({ article, onClick }) => {
   };
 
   return (
-    <div className="container" onClick={onClick}>
+    <div className="container">
       <div className="article">
         <div className="article__head">
           <div>
             <div className="article__inner">
-              <Link to={`/articles/${article.slug}`} className="article__title link">
+              <Link to={`/articles/${article.slug}`} className="article__title link" onClick={onClick}>
                 {article.title}
               </Link>
               <div className="article__like-counter">
-                <button className="article__like-btn button" id="like" disabled>
-                  <img src={heart} alt="icon" />
+                <button
+                  className="article__like-btn button"
+                  id="like"
+                  onClick={() =>
+                    !article.favorited ? dispatch(likeArticle(article.slug)) : dispatch(dislikeArticle(article.slug))
+                  }
+                >
+                  <img src={article.favorited ? heartRed : heart} alt="icon" />
                 </button>
                 <label htmlFor="like" className="article__like-text">
-                  12
+                  {article.favoritesCount}
                 </label>
               </div>
             </div>

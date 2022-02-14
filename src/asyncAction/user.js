@@ -1,5 +1,6 @@
 /* eslint-disable */
 import {
+  baseUrl,
   LOGIN_USER,
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
@@ -15,7 +16,7 @@ import { getToken } from '../store/actions';
 export const registerUser = (user) => (dispatch) => {
   dispatch({ type: REGISTER_USER });
 
-  fetch('http://kata.academy:8022/api/users', {
+  fetch(`${baseUrl}users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -31,7 +32,7 @@ export const registerUser = (user) => (dispatch) => {
 export const loginUser = (user) => (dispatch) => {
   dispatch({ type: LOGIN_USER });
 
-  fetch('http://kata.academy:8022/api/users/login', {
+  fetch(`${baseUrl}users/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -47,7 +48,7 @@ export const loginUser = (user) => (dispatch) => {
 export const updateUser = (user) => (dispatch) => {
   dispatch({ type: UPDATE_USER });
 
-  fetch('http://kata.academy:8022/api/user', {
+  fetch(`${baseUrl}user`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
