@@ -1,10 +1,11 @@
 /* eslint-disable */
 
-import React from 'react';
+import React, {useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import heart from '../../img/heart.svg';
+import warning from '../../img/warning.svg';
 import heartRed from '../../img/heartRed.svg';
 import './Article.css';
 import { dislikeArticle, likeArticle } from '../../asyncAction/articles';
@@ -12,9 +13,12 @@ import { useDispatch } from 'react-redux';
 
 const Article = ({ article, onClick }) => {
   const dispatch = useDispatch();
+  const [popup, setPopup] = useState(false);
+
   const isArticleMine = article
     ? article.author.username === JSON.parse(localStorage.getItem('user'))?.username
     : false;
+
   const convertDate = () => {
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
 
@@ -50,14 +54,34 @@ const Article = ({ article, onClick }) => {
     if (isArticleMine) {
       return (
         <div className="manage-buttons">
-          <button className="manage-buttons__button manage-buttons__button_delete button">Delete</button>
+          <button className="manage-buttons__button manage-buttons__button_delete button" onClick={() => setPopup(true)}>Delete</button>
           <Link to="/article-edit" className="manage-buttons__button manage-buttons__button_edit">
             Edit
           </Link>
+          {popup ? renderPopup() : null}
         </div>
       );
     }
   };
+
+  const renderPopup = () => {
+    return (
+      <div className='wrapper'>
+        <div className='popup'>
+          <div className='popup__content'>
+            <div className='popup__icon-wrapper'>
+              <img src={warning} alt='icon' className='popup__icon'/>
+            </div>
+            <p className='popup__text'>Are you shure to delete this article?</p>
+          </div>
+          <div className='popup__btn-wrapper'>
+            <button className='popup__button button decline' onClick={() => setPopup(false)}>No</button>
+            <button className='popup__button button accept'>Yes</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="container">
