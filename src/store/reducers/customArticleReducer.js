@@ -17,6 +17,7 @@ const initialState = {
   article: null,
   loading: false,
   error: null,
+  canRedirect: false,
 };
 
 export const customArticleReducer = (state = initialState, action) => {
@@ -43,10 +44,10 @@ export const customArticleReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case DELETE_ARTICLE_SUCCESS:
-      return { ...state, loading: false, response: action.payload };
+      return { ...state, loading: false, response: action.payload, canRedirect: true };
 
     case DELETE_ARTICLE_ERROR:
-      return { ...state, error: action.payload };
+      return { ...state, error: action.payload, canRedirect: true };
 
     default:
       return state;
