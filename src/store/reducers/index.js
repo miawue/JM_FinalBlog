@@ -1,7 +1,5 @@
-/* eslint-disable */
-
-import { articleReducer } from './articleReducer';
 import { combineReducers } from 'redux';
+import { articleReducer } from './articleReducer';
 import { userReducer } from './userReducer';
 import { customArticleReducer } from './customArticleReducer';
 

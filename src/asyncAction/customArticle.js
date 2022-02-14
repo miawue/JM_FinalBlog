@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   CREATE_ARTICLE,
   CREATE_ARTICLE_ERROR,
@@ -16,7 +14,7 @@ import { getToken } from '../store/actions';
 export const createArticle = (article) => (dispatch) => {
   dispatch({ type: CREATE_ARTICLE });
 
-  fetch('http://kata.academy:8022/api/articles', {
+  fetch('https://kata.academy:8021/api/articles', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -33,7 +31,7 @@ export const createArticle = (article) => (dispatch) => {
 export const editArticle = (article, slug) => (dispatch) => {
   dispatch({ type: EDIT_ARTICLE });
 
-  fetch(`http://kata.academy:8022/api/articles/${slug}`, {
+  fetch(`https://kata.academy:8021/api/articles/${slug}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -50,7 +48,7 @@ export const editArticle = (article, slug) => (dispatch) => {
 export const deleteArticle = (article, slug) => (dispatch) => {
   dispatch({ type: DELETE_ARTICLE });
 
-  fetch(`http://kata.academy:8022/api/articles/${slug}`, {
+  fetch(`https://kata.academy:8021/api/articles/${slug}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

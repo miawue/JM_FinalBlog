@@ -1,6 +1,4 @@
-/* eslint-disable */
-
-export const baseUrl = 'http://kata.academy:8022/api/';
+export const baseUrl = 'https://kata.academy:8021/api/';
 
 export const FETCH_ARTICLES = 'FETCH_ARTICLES';
 export const FETCH_ARTICLES_SUCCESS = 'FETCH_ARTICLES_SUCCESS';

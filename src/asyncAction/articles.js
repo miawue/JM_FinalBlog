@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   baseUrl,
   DISLIKE_ARTICLE,

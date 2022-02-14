@@ -1,12 +1,10 @@
-/* eslint-disable */
-
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import './ArticleManager.css';
-import { createArticle, editArticle } from '../../asyncAction/customArticle';
 import { useDispatch, connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { createArticle, editArticle } from '../../asyncAction/customArticle';
 
 const ArticleManager = ({ article }) => {
   const path = window.location.pathname;
@@ -21,33 +19,30 @@ const ArticleManager = ({ article }) => {
     formState: { errors },
   } = useForm();
 
-  const addTagFunc = (e) => {
-    if (e.target.parentElement.firstChild.value.trim() !== '') {
-      if (!tags.includes(e.target.parentElement.firstChild.value.trim())) {
-        setTags([...tags, e.target.parentElement.firstChild.value.trim()]);
+  const addTagFunc = (event) => {
+    if (event.target.parentElement.firstChild.value.trim() !== '') {
+      if (!tags.includes(event.target.parentElement.firstChild.value.trim())) {
+        setTags([...tags, event.target.parentElement.firstChild.value.trim()]);
       }
-      e.target.parentElement.firstChild.value = '';
+      event.target.parentElement.firstChild.value = '';
     }
   };
 
-  const removeTagFunc = (e) => {
-    if (e.target.parentElement.firstChild.value !== '') {
-      setTags(tags.filter((tag) => tag !== e.target.parentElement.firstChild.value));
+  const removeTagFunc = (event) => {
+    if (event.target.parentElement.firstChild.value !== '') {
+      setTags(tags.filter((tag) => tag !== event.target.parentElement.firstChild.value));
     }
   };
 
-  const renderTagFields = (tagsArr) => {
-    return tagsArr.map((el) => {
-      return (
-        <li className="tag" key={uuidv4()}>
-          <input type="text" className="manager__input" placeholder="Tag" defaultValue={el} />
-          <button className="tag__button tag__button_delete button" type="button" onClick={(e) => removeTagFunc(e)}>
-            Delete
-          </button>
-        </li>
-      );
-    });
-  };
+  const renderTagFields = (tagsArr) =>
+    tagsArr.map((el) => (
+      <li className="tag" key={uuidv4()}>
+        <input type="text" className="manager__input" placeholder="Tag" defaultValue={el} />
+        <button className="tag__button tag__button_delete button" type="button" onClick={(tag) => removeTagFunc(tag)}>
+          Delete
+        </button>
+      </li>
+    ));
 
   const renderTitle = () => {
     if (path === '/article-create') {
@@ -56,6 +51,7 @@ const ArticleManager = ({ article }) => {
     if (path === '/article-edit') {
       return <h2 className="manager__title">Edit article</h2>;
     }
+    return null;
   };
 
   const renderBtnText = () => {
@@ -65,6 +61,7 @@ const ArticleManager = ({ article }) => {
     if (path === '/article-edit') {
       return 'Edit';
     }
+    return null;
   };
 
   const renderError = (name) => {
@@ -138,7 +135,7 @@ const ArticleManager = ({ article }) => {
                 <button className="tag__button tag__button_disabled button" type="button" disabled>
                   Delete
                 </button>
-                <button className="tag__button tag__button_add button" type="button" onClick={(e) => addTagFunc(e)}>
+                <button className="tag__button tag__button_add button" type="button" onClick={(tag) => addTagFunc(tag)}>
                   Add tag
                 </button>
               </li>

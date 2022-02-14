@@ -1,11 +1,8 @@
-/* eslint-disable */
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './Header.css';
 import { connect, useDispatch } from 'react-redux';
-import { logOut } from '../../store/actions';
 import { LOG_OUT } from '../../store/types';
 
 const Header = ({ user }) => {
@@ -24,7 +21,7 @@ const Header = ({ user }) => {
               <img src={user.image} alt="avatar" className="user__avatar" />
             </div>
           </div>
-          <button onClick={() => dispatch({ type: LOG_OUT })} className="header__button button">
+          <button type="button" onClick={() => dispatch({ type: LOG_OUT })} className="header__button button">
             Log Out
           </button>
         </div>

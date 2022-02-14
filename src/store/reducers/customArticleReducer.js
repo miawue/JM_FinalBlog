@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   CREATE_ARTICLE,
   CREATE_ARTICLE_ERROR,

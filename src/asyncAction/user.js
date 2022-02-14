@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   baseUrl,
   LOGIN_USER,

@@ -1,10 +1,7 @@
-/* eslint-disable */
-
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchArticles, fetchOneArticle, setArticlesPage } from '../../asyncAction/articles';
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import Pagination from '@mui/material/Pagination';
+import { fetchArticles, fetchOneArticle, setArticlesPage } from '../../asyncAction/articles';
 
 import Article from '../Article';
 
@@ -17,7 +14,7 @@ const ArticleList = ({ articles, error, loading, page, totalPages }) => {
 
   useEffect(() => {
     dispatch(fetchArticles(page));
-  }, [page]);
+  }, [dispatch, page]);
 
   if (loading) {
     return <h1>Идёт загрузка..</h1>;
@@ -27,26 +24,23 @@ const ArticleList = ({ articles, error, loading, page, totalPages }) => {
     return <h1>{error}</h1>;
   }
 
-  const renderArticle = () => {
-    return articles
+  const renderArticle = () =>
+    articles
       ? articles.map((article) => (
           <Article onClick={() => dispatch(fetchOneArticle(article.slug))} key={article.slug} article={article} />
         ))
       : null;
-  };
 
   return (
-    <React.Fragment>
-      <div className="container">
-        {renderArticle()}
-        <Pagination
-          className="pagination"
-          page={page}
-          onChange={(event, num) => dispatch(setArticlesPage(num))}
-          count={totalPages}
-        />
-      </div>
-    </React.Fragment>
+    <div className="container">
+      {renderArticle()}
+      <Pagination
+        className="pagination"
+        page={page}
+        onChange={(event, num) => dispatch(setArticlesPage(num))}
+        count={totalPages}
+      />
+    </div>
   );
 };
 

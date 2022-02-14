@@ -1,12 +1,11 @@
-/* eslint-disable */
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
-import { loginUser, registerUser, updateUser } from '../../asyncAction/user';
 import { useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
+import { loginUser, registerUser, updateUser } from '../../asyncAction/user';
 import './AccountManager.css';
-import { getToken, redirectUser } from '../../store/actions';
+import { getToken } from '../../store/actions';
 
 const AccountManager = ({ agreement = false, link = true, authErrors, user, canRedirect }) => {
   const dispatch = useDispatch();
@@ -52,22 +51,20 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user, canR
     );
   }
 
-  const renderAgreement = () => {
-    return (
-      <div className="agreement">
-        <input
-          type="checkbox"
-          id="agreement"
-          className="agreement__checkbox"
-          {...register('Agreement', { required: true })}
-        />
-        <label htmlFor="agreement" className="agreement__label">
-          I agree to the processing of my personal information
-        </label>
-        {errors?.Agreement?.type === 'required' && <p className="error">We need your agreement</p>}
-      </div>
-    );
-  };
+  const renderAgreement = () => (
+    <div className="agreement">
+      <input
+        type="checkbox"
+        id="agreement"
+        className="agreement__checkbox"
+        {...register('Agreement', { required: true })}
+      />
+      <label htmlFor="agreement" className="agreement__label">
+        I agree to the processing of my personal information
+      </label>
+      {errors?.Agreement?.type === 'required' && <p className="error">We need your agreement</p>}
+    </div>
+  );
 
   const renderLink = () => {
     if (path === '/create-acc') {
@@ -85,7 +82,7 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user, canR
     if (path === '/sign-in') {
       return (
         <p className="sign-text">
-          Don't have an account?{' '}
+          Don`t have an account?{' '}
           <Link to="/create-acc" className="sign-link">
             Sign Up
           </Link>
@@ -216,23 +213,21 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user, canR
       ];
     }
 
-    return fields.map((field, id) => {
-      return (
-        <div className="account__inner field" key={id}>
-          <label className="field__label" htmlFor={field.id}>
-            {field.name}
-          </label>
-          <input
-            className="field__input"
-            type={field.type}
-            id={field.id}
-            placeholder={field.placeholder}
-            {...register(field.name, field.options)}
-          />
-          {renderError(field.name)}
-        </div>
-      );
-    });
+    return fields.map((field) => (
+      <div className="account__inner field" key={uuidv4()}>
+        <label className="field__label" htmlFor={field.id}>
+          {field.name}
+        </label>
+        <input
+          className="field__input"
+          type={field.type}
+          id={field.id}
+          placeholder={field.placeholder}
+          {...register(field.name, field.options)}
+        />
+        {renderError(field.name)}
+      </div>
+    ));
   };
 
   if (canRedirect) {

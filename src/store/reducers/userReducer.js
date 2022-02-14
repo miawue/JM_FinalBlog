@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   LOG_OUT,
   LOGIN_USER,

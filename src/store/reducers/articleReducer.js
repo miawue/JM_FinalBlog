@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   DISLIKE_ARTICLE,
   DISLIKE_ARTICLE_ERROR,
@@ -14,7 +12,6 @@ import {
   LIKE_ARTICLE_ERROR,
   LIKE_ARTICLE_SUCCESS,
   SET_ARTICLES_PAGE,
-  SET_ONE_ARTICLE,
 } from '../types';
 
 const initialState = {

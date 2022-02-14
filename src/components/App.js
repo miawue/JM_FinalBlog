@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
@@ -15,9 +14,10 @@ const App = ({ article }) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    window.location.pathname === `/articles/${slug}` ? dispatch(fetchOneArticle(slug)) : null;
-  }, []);
+  useEffect(
+    () => (window.location.pathname === `/articles/${slug}` ? dispatch(fetchOneArticle(slug)) : null),
+    [dispatch, slug]
+  );
 
   article = article ? article[0] : {};
 
@@ -30,7 +30,7 @@ const App = ({ article }) => {
           <Route path={`/articles/${article?.slug}`} element={<Article article={article} />} />
           <Route path="/article-create" element={<ArticleManager />} />
           <Route path="/article-edit" element={<ArticleManager />} />
-          <Route path="/create-acc" element={<AccountManager agreement={true} />} />
+          <Route path="/create-acc" element={<AccountManager agreement />} />
           <Route path="/sign-in" element={<AccountManager />} />
           <Route path="/edit-acc" element={<AccountManager link={false} />} />
         </Routes>
