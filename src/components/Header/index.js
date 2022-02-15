@@ -15,12 +15,12 @@ const Header = ({ user }) => {
           <Link to="/article-create" className="header__create-btn">
             Create article
           </Link>
-          <div className="user">
+          <Link to="/edit-acc" className="user">
             <span className="user__name">{user.username}</span>
             <div className="user__avatar-wrapper">
               <img src={user.image} alt="avatar" className="user__avatar" />
             </div>
-          </div>
+          </Link>
           <button type="button" onClick={() => dispatch({ type: LOG_OUT })} className="header__button button">
             Log Out
           </button>
