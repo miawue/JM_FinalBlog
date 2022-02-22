@@ -24,6 +24,9 @@ const initialState = {
 };
 
 export const articleReducer = (state = initialState, action) => {
+  const idx = state.articles.articles?.findIndex((article) => article.slug === action.payload?.article.slug);
+  const stateCopy = state.articles.articles;
+
   switch (action.type) {
     case FETCH_ARTICLES:
       return { ...state, articles: [], loading: true, error: null };
@@ -50,14 +53,16 @@ export const articleReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case LIKE_ARTICLE_SUCCESS:
-      const idx = state.articles.articles.findIndex((article) => article.slug === action.payload.article.slug);
-      const stateCopy = state.articles.articles;
       if (!stateCopy[idx].favorited) {
         stateCopy[idx].favoritesCount += 1;
       }
       stateCopy[idx].favorited = true;
-      state.articles.articles = stateCopy;
-      return { ...state, loading: false, response: action.payload };
+      return {
+        ...state,
+        loading: false,
+        response: action.payload,
+        articles: { ...state.articles, articles: stateCopy },
+      };
 
     case LIKE_ARTICLE_ERROR:
       return { ...state, loading: false, error: action.payload };
@@ -66,14 +71,16 @@ export const articleReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case DISLIKE_ARTICLE_SUCCESS:
-      const _idx = state.articles.articles.findIndex((article) => article.slug === action.payload.article.slug);
-      const _stateCopy = state.articles.articles;
-      if (_stateCopy[_idx].favorited) {
-        _stateCopy[_idx].favoritesCount -= 1;
+      if (stateCopy[idx].favorited) {
+        stateCopy[idx].favoritesCount -= 1;
       }
-      _stateCopy[_idx].favorited = false;
-      state.articles.articles = _stateCopy;
-      return { ...state, loading: false, response: action.payload };
+      stateCopy[idx].favorited = false;
+      return {
+        ...state,
+        loading: false,
+        response: action.payload,
+        articles: { ...state.articles, articles: stateCopy },
+      };
 
     case DISLIKE_ARTICLE_ERROR:
       return { ...state, loading: false, error: action.payload };
