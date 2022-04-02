@@ -44,11 +44,7 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user, canR
   let authError = '';
 
   if (authErrors) {
-    authError = (
-      <p className="error">
-        {Object.keys(authErrors)[0]} {Object.values(authErrors)[0]}
-      </p>
-    );
+    authError = <p className="error">{Object.keys(authErrors).map((item) => `${item} ${authErrors[item]}  \n`)}</p>;
   }
 
   const renderAgreement = () => (
@@ -187,28 +183,28 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user, canR
           type: 'text',
           id: 'username',
           placeholder: 'Username',
-          options: { required: true },
+          options: { required: false },
         },
         {
           name: 'Email address',
           type: 'email',
           id: 'email',
           placeholder: 'Email address',
-          options: { required: true, pattern: /\S+@\S+.\S+/ },
+          options: { required: false, pattern: /\S+@\S+.\S+/ },
         },
         {
           name: 'New Password',
           type: 'password',
           id: 'password',
           placeholder: 'New Password',
-          options: { required: true, minLength: 6, maxLength: 40 },
+          options: { required: false, minLength: 6, maxLength: 40 },
         },
         {
           name: 'Avatar image url()',
           type: 'text',
           id: 'avatar',
           placeholder: 'Avatar image',
-          options: { required: true },
+          options: { required: false },
         },
       ];
     }
@@ -230,7 +226,7 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user, canR
     ));
   };
 
-  if (canRedirect) {
+  if (canRedirect && !authErrors) {
     navigate('/');
     window.location.reload();
   }
@@ -243,11 +239,11 @@ const AccountManager = ({ agreement = false, link = true, authErrors, user, canR
       token: getToken().slice(6),
       image: data['Avatar image url()'],
     };
-    if (path === '/create-acc' && !authErrors) {
+    if (path === '/create-acc') {
       await dispatch(registerUser(user));
-    } else if (path === '/sign-in' && !authErrors) {
+    } else if (path === '/sign-in') {
       await dispatch(loginUser(user));
-    } else if (path === '/edit-acc' && !authErrors) {
+    } else if (path === '/edit-acc') {
       localStorage.setItem('user', JSON.stringify({ ...user, image: user.image }));
       await dispatch(updateUser(user));
     }

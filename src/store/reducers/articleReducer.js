@@ -24,7 +24,7 @@ const initialState = {
 };
 
 export const articleReducer = (state = initialState, action) => {
-  const idx = state.articles.articles?.findIndex((article) => article.slug === action.payload?.article.slug);
+  const idx = state.articles.articles?.findIndex((article) => article?.slug === action.payload?.article?.slug);
   const stateCopy = state.articles.articles;
 
   switch (action.type) {
